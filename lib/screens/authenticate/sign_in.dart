@@ -12,9 +12,9 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.brown[100],
+      backgroundColor: Colors.grey[400],
       appBar: AppBar(
-        backgroundColor: Colors.brown[400],
+        backgroundColor: Colors.orange[900],
         elevation: 0.0,
         title: Text('Sign in to App04 '),
       ),
@@ -24,6 +24,7 @@ class _SignInState extends State<SignIn> {
               child: Text('Sign in anon'),
               onPressed: () async {
                 dynamic result = await _auth.signInAnon();
+                //print('ddd');
                 if (result == null) {
                   print('error signing in');
                 } else {
