@@ -1,26 +1,25 @@
-import 'package:app04/services/auth.dart';
 import 'package:flutter/material.dart';
+import 'package:app04/services/auth.dart';
 
-class SignIn extends StatefulWidget {
+class Register extends StatefulWidget {
   @override
-  _SignInState createState() => _SignInState();
+  _RegisterState createState() => _RegisterState();
 }
 
-class _SignInState extends State<SignIn> {
-  final AuthService _auth = AuthService();
-
-// textowe pole stanu
+class _RegisterState extends State<Register> {
+   final AuthService _auth = AuthService();
+  // textowe pole stanu
   String email = '';
   String password = '';
-
+  
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+      return Scaffold(
         backgroundColor: Colors.orange[100],
         appBar: AppBar(
           backgroundColor: Colors.orange[900],
           elevation: 0.0,
-          title: Text('Sign in to App04 '),
+          title: Text('Sign up in to App04 '),
         ),
         body: Container(
           padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
@@ -47,7 +46,7 @@ class _SignInState extends State<SignIn> {
                 RaisedButton(
                     color: Colors.pink[400],
                     child: Text(
-                      'Sign in',
+                      'Register',
                       style: TextStyle(color: Colors.white),
                     ),
                     onPressed: () async {
