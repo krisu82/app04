@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:app04/services/auth.dart';
+import 'package:app04/shared/constants.dart';
+import 'package:app04/shared/loading.dart';
+
 
 class Register extends StatefulWidget {
   final Function toggleView;
@@ -12,6 +15,7 @@ class Register extends StatefulWidget {
 class _RegisterState extends State<Register> {
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
+  bool loading = false;
 
   // textowe pole stanu
   String email = '';
@@ -20,7 +24,7 @@ class _RegisterState extends State<Register> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return loading ? Loading(): Scaffold(
         backgroundColor: Colors.orange[100],
         appBar: AppBar(
           backgroundColor: Colors.orange[900],
@@ -46,6 +50,7 @@ class _RegisterState extends State<Register> {
                   height: 20.0,
                 ),
                 TextFormField(
+                    decoration: textInputDecoration.copyWith(hintText:'Email'),
                     validator: (val) => val.isEmpty ? 'Wprowadź email' : null,
                     onChanged: (val) {
                       setState(() => email = val);
@@ -54,8 +59,11 @@ class _RegisterState extends State<Register> {
                   height: 20.0,
                 ),
                 TextFormField(
+                    decoration: textInputDecoration.copyWith(hintText:'Hasło'),
                     obscureText: true,
-                    validator: (val) => val.length < 6 ? 'Hasło musi mieć conajmniej 6 znaków' : null,
+                    validator: (val) => val.length < 6
+                        ? 'Hasło musi mieć conajmniej 6 znaków'
+                        : null,
                     onChanged: (val) {
                       setState(() => password = val);
                     }),
@@ -70,10 +78,12 @@ class _RegisterState extends State<Register> {
                     ),
                     onPressed: () async {
                       if (_formKey.currentState.validate()) {
+                        setState(() => loading = true);
                         dynamic result = await _auth
                             .registerWithEmailAndPassword(email, password);
                         if (result == null) {
                           setState(() => error = 'podaj właściwy email');
+                        loading = false;
                         }
                       }
                     }),
