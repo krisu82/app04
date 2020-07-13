@@ -1,4 +1,5 @@
 import 'package:app04/models/user.dart';
+import 'package:app04/services/database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthService {
@@ -48,6 +49,9 @@ Future signInWithEmailAndPassword(String email, String password) async {
       AuthResult result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       FirebaseUser user = result.user;
+
+      //tworze nowy dokument dla nowoutowrzonego usera
+      await DatabaseService(uid: user.uid).updateUserData('0','new user app04', 100);
       return _userFromFirebaseUser(user);
     } catch (e) {
       print(e.toString());
