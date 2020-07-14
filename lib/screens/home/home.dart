@@ -1,18 +1,33 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:app04/services/auth.dart';
 import 'package:app04/services/database.dart';
 import 'package:provider/provider.dart';
 import 'package:app04/screens/home/app04_list.dart';
+import 'package:app04/models/app04.dart';
 
 class Home extends StatelessWidget {
   final AuthService _auth = AuthService();
 
   @override
   Widget build(BuildContext context) {
-    return StreamProvider<QuerySnapshot>.value(
-      value: DatabaseService().app04,
+
+void _showSettingsPanel(){
+
+  showModalBottomSheet(context: context, builder: (context) {
+return Container (
+padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 60.0),
+child: Text('dolna zakładka'),
+
+
+);
+
+  });
+}
+
+
+    return StreamProvider<List<App04>>.value(
+      value: DatabaseService().app04s,
       child: Scaffold(
         backgroundColor: Colors.orange[100],
         appBar: AppBar(
@@ -26,7 +41,13 @@ class Home extends StatelessWidget {
               onPressed: () async {
                 await _auth.signOut();
               },
-            )
+            ),
+
+            FlatButton.icon(
+              onPressed: () => _showSettingsPanel(), 
+              icon: Icon(Icons.settings), 
+              label: Text('Ustawienia')
+              )
           ],
         ),
 body: App04List()

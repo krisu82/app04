@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
+import 'package:app04/models/app04.dart';
+import 'package:app04/screens/home/app04_tile.dart';
 
 class App04List extends StatefulWidget {
   @override
@@ -11,15 +12,16 @@ class _App04ListState extends State<App04List> {
   @override
   Widget build(BuildContext context) {
     
-    final app04 = Provider.of<QuerySnapshot>(context);
-    //rint(app04.documents);
-for (var doc in app04.documents){
+    final app04s = Provider.of<List<App04>>(context);
 
-  print(doc.data);
-}
 
-    return Container(
-      
+    return ListView.builder(
+      itemCount: app04s.length,
+      itemBuilder: (context, index) {
+        return App04Tile(app04: app04s[index]);
+
+      },
+
     );
   }
 }
