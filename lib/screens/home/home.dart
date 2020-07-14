@@ -1,3 +1,4 @@
+import 'package:app04/screens/home/settings_form.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:app04/services/auth.dart';
@@ -17,7 +18,7 @@ void _showSettingsPanel(){
   showModalBottomSheet(context: context, builder: (context) {
 return Container (
 padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 60.0),
-child: Text('dolna zakładka'),
+child: SettingsForm(),
 
 
 );

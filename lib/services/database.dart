@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:app04/models/app04.dart';
+import 'package:app04/models/user.dart';
+
 
 class DatabaseService {
   final String uid;
@@ -28,9 +30,31 @@ class DatabaseService {
     }).toList();
   }
 
+//userData ze snapshota
+
+UserData _userDataFromSnapshot(DocumentSnapshot snapshot) {
+return UserData(
+uid: uid,
+name: snapshot.data['name'],
+sugars: snapshot.data['sugars'],
+strength: snapshot.data['strength'],
+
+);
+
+}
+
 //weź stream app04s
   Stream<List<App04>> get app04s {
     return app04Collection.snapshots()
     .map(_app04ListFromSnapshot);
   }
+
+//weż stream dokument uzytkownika
+
+Stream<UserData> get userData {
+return app04Collection.document(uid).snapshots()
+.map(_userDataFromSnapshot);
+
+}
+
 }
