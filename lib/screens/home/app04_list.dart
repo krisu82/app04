@@ -12,7 +12,7 @@ class _App04ListState extends State<App04List> {
   @override
   Widget build(BuildContext context) {
     
-    final app04s = Provider.of<List<App04>>(context);
+    final app04s = Provider.of<List<App04>>(context) ?? [];
 
 
     return ListView.builder(

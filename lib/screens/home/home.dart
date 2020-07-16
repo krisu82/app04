@@ -12,48 +12,42 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-void _showSettingsPanel(){
-
-  showModalBottomSheet(context: context, builder: (context) {
-return Container (
-padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 60.0),
-child: SettingsForm(),
-
-
-);
-
-  });
-}
-
+    void _showSettingsPanel() {
+      showModalBottomSheet(
+          context: context,
+          builder: (context) {
+            return Container(
+              padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 60.0),
+              child: SettingsForm(),
+            );
+          });
+    }
 
     return StreamProvider<List<App04>>.value(
       value: DatabaseService().app04s,
       child: Scaffold(
-        backgroundColor: Colors.orange[100],
-        appBar: AppBar(
-          title: Text('App04'),
-          backgroundColor: Colors.orange[900],
-          elevation: 0.0,
-          actions: <Widget>[
-            FlatButton.icon(
-              icon: Icon(Icons.person),
-              label: Text('wyloguj'),
-              onPressed: () async {
-                await _auth.signOut();
-              },
-            ),
-
-            FlatButton.icon(
-              onPressed: () => _showSettingsPanel(), 
-              icon: Icon(Icons.settings), 
-              label: Text('Ustawienia')
-              )
-          ],
-        ),
-body: App04List()
-
-      ),
+          backgroundColor: Colors.orange[100],
+          appBar: AppBar(
+            title: Text('App04'),
+            backgroundColor: Colors.orange[900],
+            elevation: 0.0,
+            actions: <Widget>[
+              FlatButton.icon(
+                icon: Icon(Icons.person),
+                label: Text('wyloguj'),
+                onPressed: () async {
+                  await _auth.signOut();
+                },
+              ),
+              FlatButton.icon(
+                  
+                  icon: Icon(Icons.settings),
+                  label: Text('Ustawienia'),
+                  onPressed: () => _showSettingsPanel(),
+                  )
+            ],
+          ),
+          body: App04List()),
     );
   }
 }
