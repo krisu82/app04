@@ -15,7 +15,9 @@ class App04Tile extends StatelessWidget {
                 leading: CircleAvatar(
               radius: 25.0,
               backgroundColor: Colors.orange[app04.strength],
-                ),
+              //backgroundImage: AssetImage('assets/coffee_bg.png'),
+              //backgroundImage: AssetImage('asstes/coffee_icon.png'),
+              ),
               title: Text(app04.name),
               subtitle: Text ('Takes ${app04.sugars} sugar(s)'),
             ),

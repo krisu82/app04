@@ -40,14 +40,19 @@ class Home extends StatelessWidget {
                 },
               ),
               FlatButton.icon(
-                  
-                  icon: Icon(Icons.settings),
-                  label: Text('Ustawienia'),
-                  onPressed: () => _showSettingsPanel(),
-                  )
+                icon: Icon(Icons.settings),
+                label: Text('Ustawienia'),
+                onPressed: () => _showSettingsPanel(),
+              )
             ],
           ),
-          body: App04List()),
+          body: Container(
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage('assets/coffee_bg.png'),
+                      fit: BoxFit.cover,
+                      )),
+              child: App04List())),
     );
   }
 }
